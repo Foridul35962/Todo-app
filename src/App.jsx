@@ -12,9 +12,21 @@ function App() {
 
   const addElement = () =>{
     if(task.trim()!==""){
-      updateViewTask([...viewTask,task]);
+      updateViewTask([...viewTask,{text:task, done: false}]);
       newTask("");
     }
+  };
+
+  const toggleItem= (idx)=>{
+    const updated = viewTask.map((item,index)=>(
+      index===idx? {...item, done:!item.done} : item
+    ))
+    updateViewTask(updated);
+  };
+
+  const taskDelete = (idx)=>{
+    const newViewTask=viewTask.filter((_,index)=>index!==idx);
+    updateViewTask(newViewTask);
   }
 
   return (
@@ -22,7 +34,7 @@ function App() {
       <div className="flex flex-col items-center justify-center bg-black p-10 rounded-2xl w-md">
         <Head></Head>
         <InputValue addInput={addInput} addElementClick={addElement} task={task}></InputValue>
-        <AddElement viewTask={viewTask}></AddElement>
+        <AddElement viewTask={viewTask} taskDelete={taskDelete} toggleItem={toggleItem}></AddElement>
       </div>
     </div>
   )
