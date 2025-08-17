@@ -16,6 +16,7 @@ function App() {
     if (task.trim() !== "") {
       updateViewTask([...viewTask, { text: task, done: false }]);
       newTask("");
+      addNotification();
     }
   };
 
@@ -77,7 +78,7 @@ function App() {
     <div className="flex items-center justify-center h-dvh w-full">
       <div className="flex flex-col items-center justify-center bg-black p-10 rounded-2xl w-md">
         <Head></Head>
-        <InputValue addInput={addInput} addElementClick={addElement} task={task} addNotification={addNotification}></InputValue>
+        <InputValue addInput={addInput} addElementClick={addElement} task={task}></InputValue>
         <AddElement viewTask={viewTask} taskDelete={taskDelete} toggleItem={toggleItem} doneNotification={doneNotification} deleteNotification={deleteNotification}></AddElement>
       </div>
       <ToastContainer />
